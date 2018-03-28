@@ -8,7 +8,11 @@
 注解：butterknife
 
 权限:rxpermissions2
+
 网络：okhttp3+retrofit2
+
 调试:stetho
+
 内存检测：leakcanary
+
 单元测试：junit+mockito
