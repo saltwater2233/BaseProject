@@ -1,0 +1,93 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.saltwater.baseprojectmvp"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+
+    /*系统*/
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:support-v4:26.+'
+    testCompile 'junit:junit:4.12'
+    //官方
+    compile 'com.android.support:cardview-v7:26.+'
+    compile 'com.android.support:recyclerview-v7:26.+'
+    compile 'com.android.support:design:26.1.0'
+
+    /*必要*/
+    //json处理
+    compile 'com.google.code.gson:gson:2.8.2'
+    //图片加载
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    //view绑定
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+
+    /*RxJava2*/
+    compile 'io.reactivex.rxjava2:rxjava:2.1.9'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    //权限请求
+    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
+
+    /*网络框架*/
+    //底层okHttp
+    compile 'com.squareup.okhttp3:okhttp:3.9.1'
+    //打印请求日志，logtcat关键字：okhttp
+    compile 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+    //retrofit2
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    //retrofit2转gson辅助
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    //retrofit2转RxJava辅助
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+
+    /*RxJava自动内存回收*/
+    compile 'com.trello.rxlifecycle2:rxlifecycle:2.2.1'
+    compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
+    /*内存泄漏检测*/
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+
+    /*调试*/
+    //可以在Chrome里调试
+    compile 'com.facebook.stetho:stetho:1.3.1'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.3.1'
+
+    /*单元测试*/
+    // 如果要使用Mockito，你需要添加此条依赖库
+    testCompile 'org.mockito:mockito-core:1.+'
+    // 如果你要使用Mockito 用于 Android instrumentation tests，那么需要你添加以下三条依赖库
+    androidTestCompile 'org.mockito:mockito-core:1.+'
+    androidTestCompile "com.google.dexmaker:dexmaker:1.2"
+    androidTestCompile "com.google.dexmaker:dexmaker-mockito:1.2"
+
+
+}
