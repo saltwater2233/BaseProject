@@ -29,11 +29,8 @@ public class UpdatePresenter implements UpdateContract.presenter {
     @Nonnull
     private CompositeDisposable mCompositeDisposable;
 
-    private LifecycleProvider<ActivityEvent> mProvider;
-
-    public UpdatePresenter(UpdateContract.View view , LifecycleProvider provider) {
+    public UpdatePresenter(UpdateContract.View view ) {
         mView = view;
-        mProvider = provider;
         mCompositeDisposable = new CompositeDisposable();
     }
 
@@ -54,7 +51,6 @@ public class UpdatePresenter implements UpdateContract.presenter {
         mCompositeDisposable.clear();//防止内存占用过大，每次请求前先清空一下
         Disposable disposable = RetrofitHelper.getUpdateApi()
                 .getUpdate()
-                .compose(mProvider.bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<UpdateEntity>() {
