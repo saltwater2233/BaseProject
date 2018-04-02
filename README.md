@@ -15,4 +15,6 @@
 
 内存检测：leakcanary
 
+RxJava内存自动回收：rxlifecycle
+
 单元测试：junit+mockito
