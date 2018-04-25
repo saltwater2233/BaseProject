@@ -22,7 +22,7 @@ import io.reactivex.functions.Consumer;
  * </pre>
  */
 
-public class PermissionUtils {
+public class PermissionUtil {
     public interface PermissionsResultListener {
         //成功
         void onSuccessful();

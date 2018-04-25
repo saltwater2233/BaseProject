@@ -16,7 +16,7 @@ import java.util.Map;
  * </pre>
  */
 
-public class SharedPreferencesUtils {
+public class SharedPreferencesUtil {
     /**
      * 保存在手机里面的文件名
      */

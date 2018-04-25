@@ -17,10 +17,10 @@ import android.view.WindowManager;
  * </pre>
  */
 
-public class ScreenInfoUtils {
+public class ScreenInfoUtil {
 
 
-    private ScreenInfoUtils()
+    private ScreenInfoUtil()
     {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
