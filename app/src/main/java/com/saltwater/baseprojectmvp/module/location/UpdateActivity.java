@@ -1,5 +1,6 @@
 package com.saltwater.baseprojectmvp.module.location;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -55,4 +56,8 @@ public class UpdateActivity extends BaseActivity implements UpdateContract.View 
         }
     }
 
+    @Override
+    public Context getContext() {
+        return this;
+    }
 }

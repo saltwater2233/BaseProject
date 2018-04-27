@@ -16,6 +16,8 @@
 
 package com.saltwater.baseprojectmvp.common.base;
 
-public interface BaseView<T> {
+import android.content.Context;
 
+public interface BaseView<T> {
+    Context getContext();
 }

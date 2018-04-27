@@ -144,6 +144,9 @@ public class MediaUtil {
      */
     public static File getFile(Context context) {
         String path = null;
+        if (mUri==null){
+            return null;
+        }
         if ("file".equals(mUri.getScheme())) {
             path = mUri.getEncodedPath();
             if (path != null) {
