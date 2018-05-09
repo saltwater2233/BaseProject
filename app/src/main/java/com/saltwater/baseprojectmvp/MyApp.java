@@ -10,6 +10,7 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = this;
+        String name = "sas";
         init();
     }
 
