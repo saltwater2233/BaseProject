@@ -19,5 +19,5 @@
         android:id="@+id/btn_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="显示省份"/>
+        android:text="请求数据"/>
 </android.support.constraint.ConstraintLayout>

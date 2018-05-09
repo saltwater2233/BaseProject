@@ -1,13 +1,12 @@
 package com.saltwater.baseprojectmvp.module.location;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.saltwater.baseprojectmvp.R;
-import com.saltwater.baseprojectmvp.common.base.BaseActivity;
+import com.saltwater.baseprojectmvp.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -25,19 +24,14 @@ public class UpdateActivity extends BaseActivity implements UpdateContract.View 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mPresenter = new UpdatePresenter(this);
+        mPresenter = new UpdatePresenter(this,this);
     }
 
     @Override
-    public void subscribePresenter() {
-        mPresenter.subscribe();
+    protected void onResume() {
+        super.onResume();
+        mPresenter.start();
     }
-
-    @Override
-    public void unsubscribePresenter() {
-        mPresenter.unsubscribe();
-    }
-
 
     @Override
     public void showMsg(String name) {
@@ -56,8 +50,4 @@ public class UpdateActivity extends BaseActivity implements UpdateContract.View 
         }
     }
 
-    @Override
-    public Context getContext() {
-        return this;
-    }
 }

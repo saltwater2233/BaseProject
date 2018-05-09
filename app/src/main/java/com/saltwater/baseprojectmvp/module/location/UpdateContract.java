@@ -1,7 +1,7 @@
 package com.saltwater.baseprojectmvp.module.location;
 
-import com.saltwater.baseprojectmvp.common.base.BasePresenter;
-import com.saltwater.baseprojectmvp.common.base.BaseView;
+import com.saltwater.baseprojectmvp.base.BasePresenter;
+import com.saltwater.baseprojectmvp.base.BaseView;
 
 /**
  * <pre>
