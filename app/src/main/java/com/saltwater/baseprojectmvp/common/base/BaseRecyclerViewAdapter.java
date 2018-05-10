@@ -1,4 +1,4 @@
-package com.saltwater.baseprojectmvp.base;
+package com.saltwater.baseprojectmvp.common.base;
 
 import android.content.Context;
 import android.support.annotation.IdRes;

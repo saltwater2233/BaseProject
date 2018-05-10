@@ -1,4 +1,4 @@
-package com.saltwater.baselib.widget;
+package com.saltwater.baseprojectmvp.common.widget;
 
 import android.content.Context;
 import android.graphics.Bitmap;

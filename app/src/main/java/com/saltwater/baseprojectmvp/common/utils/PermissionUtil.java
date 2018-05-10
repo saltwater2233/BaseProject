@@ -1,4 +1,4 @@
-package com.saltwater.baselib.utils;
+package com.saltwater.baseprojectmvp.common.utils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;

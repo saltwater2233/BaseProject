@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.saltwater.baseprojectmvp.R;
-import com.saltwater.baseprojectmvp.base.BaseActivity;
+import com.saltwater.baseprojectmvp.common.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;

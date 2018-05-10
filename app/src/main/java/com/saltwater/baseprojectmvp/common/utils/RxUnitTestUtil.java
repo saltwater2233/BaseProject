@@ -1,4 +1,4 @@
-package com.saltwater.baselib.utils;
+package com.saltwater.baseprojectmvp.common.utils;
 
 import io.reactivex.Scheduler;
 import io.reactivex.android.plugins.RxAndroidPlugins;

@@ -1,4 +1,4 @@
-package com.saltwater.baseprojectmvp.base;
+package com.saltwater.baseprojectmvp.common.base;
 
 import android.support.annotation.LayoutRes;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;

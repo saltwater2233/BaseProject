@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.saltwater.baseprojectmvp.base;
+package com.saltwater.baseprojectmvp.common.base;
 
 
 public interface BaseView<T> {
