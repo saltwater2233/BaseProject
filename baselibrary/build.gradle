@@ -1,25 +1,27 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 27
+
+
+
     defaultConfig {
-        applicationId "com.saltwater.baseprojectmvp"
-        minSdkVersion 16
+        minSdkVersion 14
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
-    }
+
 }
 
 dependencies {
@@ -86,7 +88,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     //retrofit2转RxJava辅助
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
-
 
 
 }
