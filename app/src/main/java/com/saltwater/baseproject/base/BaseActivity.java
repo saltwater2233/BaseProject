@@ -1,7 +1,12 @@
 package com.saltwater.baseproject.base;
 
+import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.Nullable;
+
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -14,19 +19,32 @@ import butterknife.Unbinder;
  *     version: 1.0
  * </pre>
  */
-public abstract class BaseActivity<T> extends RxAppCompatActivity {
+public abstract class BaseActivity extends RxAppCompatActivity {
     private Unbinder bind;
+    public Context mContext;//上下文对象
+
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mContext = this;
+    }
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
-        bind = ButterKnife.bind(this);
+        if (layoutResID != 0) {
+            bind = ButterKnife.bind(this);
+        }
+
     }
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        bind.unbind();
+        if (bind != null) {
+            bind.unbind();
+        }
     }
 }

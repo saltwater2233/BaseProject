@@ -20,18 +20,14 @@ public class UpdateActivity extends BaseActivity implements UpdateContract.View 
 
     UpdatePresenter mPresenter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mPresenter = new UpdatePresenter(this,this);
+        mPresenter = new UpdatePresenter(this, this);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mPresenter.start();
-    }
 
     @Override
     public void showMsg(String name) {
