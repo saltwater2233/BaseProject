@@ -16,6 +16,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.Query;
 
 /**
  * <pre>
@@ -28,6 +29,9 @@ import retrofit2.http.PartMap;
  */
 
 public interface UpdateApi {
+
+    @GET("Login/getVerify")
+    Observable<ResponseEntity<Object>> getVerify(@Query("login_name") String phoneNumber, @Query("isFindPwd") int type);
 
     @GET("api/4/version/android/2.3.0")
     Observable<UpdateEntity> getUpdate();

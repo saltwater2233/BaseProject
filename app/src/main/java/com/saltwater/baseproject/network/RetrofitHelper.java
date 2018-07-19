@@ -1,5 +1,9 @@
 package com.saltwater.baseproject.network;
 
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.saltwater.baseproject.MyApp;
 import com.saltwater.baseproject.network.api.UpdateApi;
 
 import java.io.IOException;
@@ -26,7 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitHelper {
 
-    public static UpdateApi getUpdateApi(){
+    public static UpdateApi getUpdateApi() {
         return createApi(UpdateApi.class, ApiConstants.BASE_URL);
     }
 
@@ -40,7 +44,8 @@ public class RetrofitHelper {
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 //.addNetworkInterceptor(new StethoInterceptor())
                 //.addInterceptor(new HeaderInterceptor())
-                //.addInterceptor(interceptor)
+                .cookieJar(new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(MyApp.getInstance())))
+                .addInterceptor(interceptor)
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)

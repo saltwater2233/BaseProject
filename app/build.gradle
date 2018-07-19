@@ -50,7 +50,6 @@ dependencies {
     implementation 'com.facebook.stetho:stetho:1.3.1'
     implementation 'com.facebook.stetho:stetho-okhttp3:1.3.1'
 
-
     // ------------- 常用库 -------------
     //json处理
     implementation 'com.google.code.gson:gson:2.8.2'
@@ -63,7 +62,6 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
 
-
     // ------------- RxJava相关 -------------
     //rxJava2
     implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
@@ -73,7 +71,6 @@ dependencies {
     //RxJava自动内存回收
     implementation 'com.trello.rxlifecycle2:rxlifecycle:2.2.1'
     implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
-
 
     // ------------- 网络相关 -------------
     //底层okHttp
@@ -86,7 +83,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     //retrofit2转RxJava辅助
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
-
+//Cookie保持
+    implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 
 
 }

@@ -16,7 +16,8 @@ import android.widget.Toast;
  */
 
 public class ToastUtil {
-    public static boolean isShow = true;
+    private static Toast toast;
+    private static Snackbar snackbar;
 
     private ToastUtil() {
         /* cannot be instantiated */
@@ -31,9 +32,12 @@ public class ToastUtil {
      * @param message
      */
     public static void showShort(Context context, CharSequence message) {
-        if (isShow) {
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+        if (toast == null) {
+            toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
+        } else {
+            toast.setText(message);
         }
+        toast.show();//设置新的消息提示
 
     }
 
@@ -44,9 +48,12 @@ public class ToastUtil {
      * @param message
      */
     public static void showShort(Context context, int message) {
-        if (isShow) {
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+        if (toast == null) {
+            toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
+        } else {
+            toast.setText(message);
         }
+        toast.show();
 
     }
 
@@ -57,9 +64,12 @@ public class ToastUtil {
      * @param message
      */
     public static void showLong(Context context, CharSequence message) {
-        if (isShow) {
-            Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+        if (toast == null) {
+            toast = Toast.makeText(context, message, Toast.LENGTH_LONG);
+        } else {
+            toast.setText(message);
         }
+        toast.show();
 
     }
 
@@ -70,10 +80,12 @@ public class ToastUtil {
      * @param message
      */
     public static void showLong(Context context, int message) {
-        if (isShow) {
-            Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+        if (toast == null) {
+            toast = Toast.makeText(context, message, Toast.LENGTH_LONG);
+        } else {
+            toast.setText(message);
         }
-
+        toast.show();
     }
 
     /**
@@ -84,9 +96,12 @@ public class ToastUtil {
      * @param duration
      */
     public static void show(Context context, CharSequence message, int duration) {
-        if (isShow) {
-            Toast.makeText(context, message, duration).show();
+        if (toast == null) {
+            toast = Toast.makeText(context, message, duration);
+        } else {
+            toast.setText(message);
         }
+        toast.show();
 
     }
 
@@ -98,9 +113,12 @@ public class ToastUtil {
      * @param duration
      */
     public static void show(Context context, int message, int duration) {
-        if (isShow) {
-            Toast.makeText(context, message, duration).show();
+        if (toast == null) {
+            toast = Toast.makeText(context, message, duration);
+        } else {
+            toast.setText(message);
         }
+        toast.show();
 
     }
 
@@ -111,10 +129,20 @@ public class ToastUtil {
      * @param listener
      */
     public static void showSnackBarShort(View view, CharSequence text, View.OnClickListener listener) {
-        Snackbar.make(view, text, Snackbar.LENGTH_SHORT).setAction("撤销", listener).show();
+        if (snackbar == null) {
+            snackbar = Snackbar.make(view, text, Snackbar.LENGTH_SHORT).setAction("撤销", listener);
+        } else {
+            snackbar.setAction(text, listener);
+        }
+        snackbar.show();
     }
 
     public static void showSnackBarLong(View view, CharSequence text, View.OnClickListener listener) {
-        Snackbar.make(view, text, Snackbar.LENGTH_LONG).setAction("撤销", listener).show();
+        if (snackbar == null) {
+            snackbar = Snackbar.make(view, text, Snackbar.LENGTH_LONG).setAction("撤销", listener);
+        } else {
+            snackbar.setAction(text, listener);
+        }
+        snackbar.show();
     }
 }
