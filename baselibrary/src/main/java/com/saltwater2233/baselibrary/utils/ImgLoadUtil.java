@@ -1,8 +1,12 @@
 package com.saltwater2233.baselibrary.utils;
+
 import android.content.Context;
+import android.net.Uri;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+
+import java.io.File;
 
 /**
  * <pre>
@@ -15,11 +19,11 @@ import com.bumptech.glide.Glide;
  */
 
 public class ImgLoadUtil {
-    private ImgLoadUtil()
-    {
+    private ImgLoadUtil() {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
     }
+
     //加载图片url地址
     public static void loadImage(Context mContext, String url, ImageView mImageView) {
         Glide.with(mContext).load(url).into(mImageView);
@@ -28,6 +32,15 @@ public class ImgLoadUtil {
     //加载res资源
     public static void loadImage(Context mContext, int res, ImageView mImageView) {
         Glide.with(mContext).load(res).into(mImageView);
+    }
+
+    //加载Uri地址图片
+    public static void loadImage(Context mContext, Uri uri, ImageView imageView) {
+        Glide.with(mContext).load(uri).into(imageView);
+    }
+
+    public static void loadFilePath(Context mContext, String filePath, ImageView imageView) {
+        Glide.with(mContext).load(Uri.fromFile(new File(filePath))).into(imageView);
     }
 
     //加载图片url地址，带加载中图片和加载失败图片

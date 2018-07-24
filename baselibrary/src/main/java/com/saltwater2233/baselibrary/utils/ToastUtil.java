@@ -16,14 +16,16 @@ import android.widget.Toast;
  */
 
 public class ToastUtil {
-    private static Toast toast;
-    private static Snackbar snackbar;
+    private Toast toast;
+    private Snackbar snackbar;
+    private static ToastUtil mInstance;
 
-    private ToastUtil() {
-        /* cannot be instantiated */
-        throw new UnsupportedOperationException("cannot be instantiated");
+    public static synchronized ToastUtil getInstance() {
+        if (mInstance == null) {
+            return new ToastUtil();
+        }
+        return mInstance;
     }
-
 
     /**
      * 短时间显示Toast
@@ -31,14 +33,13 @@ public class ToastUtil {
      * @param context
      * @param message
      */
-    public static void showShort(Context context, CharSequence message) {
+    public void showShort(Context context, CharSequence message) {
         if (toast == null) {
             toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
         } else {
             toast.setText(message);
         }
         toast.show();//设置新的消息提示
-
     }
 
     /**
@@ -47,7 +48,7 @@ public class ToastUtil {
      * @param context
      * @param message
      */
-    public static void showShort(Context context, int message) {
+    public void showShort(Context context, int message) {
         if (toast == null) {
             toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
         } else {
@@ -63,7 +64,7 @@ public class ToastUtil {
      * @param context
      * @param message
      */
-    public static void showLong(Context context, CharSequence message) {
+    public void showLong(Context context, CharSequence message) {
         if (toast == null) {
             toast = Toast.makeText(context, message, Toast.LENGTH_LONG);
         } else {
@@ -79,7 +80,7 @@ public class ToastUtil {
      * @param context
      * @param message
      */
-    public static void showLong(Context context, int message) {
+    public void showLong(Context context, int message) {
         if (toast == null) {
             toast = Toast.makeText(context, message, Toast.LENGTH_LONG);
         } else {
@@ -95,7 +96,7 @@ public class ToastUtil {
      * @param message
      * @param duration
      */
-    public static void show(Context context, CharSequence message, int duration) {
+    public void show(Context context, CharSequence message, int duration) {
         if (toast == null) {
             toast = Toast.makeText(context, message, duration);
         } else {
@@ -112,7 +113,7 @@ public class ToastUtil {
      * @param message
      * @param duration
      */
-    public static void show(Context context, int message, int duration) {
+    public void show(Context context, int message, int duration) {
         if (toast == null) {
             toast = Toast.makeText(context, message, duration);
         } else {
@@ -128,7 +129,7 @@ public class ToastUtil {
      * @param view
      * @param listener
      */
-    public static void showSnackBarShort(View view, CharSequence text, View.OnClickListener listener) {
+    public void showSnackBarShort(View view, CharSequence text, View.OnClickListener listener) {
         if (snackbar == null) {
             snackbar = Snackbar.make(view, text, Snackbar.LENGTH_SHORT).setAction("撤销", listener);
         } else {
@@ -137,7 +138,7 @@ public class ToastUtil {
         snackbar.show();
     }
 
-    public static void showSnackBarLong(View view, CharSequence text, View.OnClickListener listener) {
+    public void showSnackBarLong(View view, CharSequence text, View.OnClickListener listener) {
         if (snackbar == null) {
             snackbar = Snackbar.make(view, text, Snackbar.LENGTH_LONG).setAction("撤销", listener);
         } else {

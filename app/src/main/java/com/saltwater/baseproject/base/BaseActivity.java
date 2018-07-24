@@ -37,6 +37,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
             bind = ButterKnife.bind(this);
         }
 
+        ActivityManager.getInstance().addActivity(this);
     }
 
 
@@ -46,5 +47,6 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         if (bind != null) {
             bind.unbind();
         }
+        ActivityManager.getInstance().finishActivity(this);
     }
 }
