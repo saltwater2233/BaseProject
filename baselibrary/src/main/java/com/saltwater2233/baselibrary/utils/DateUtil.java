@@ -205,5 +205,4 @@ public class DateUtil {
         Calendar cd = Calendar.getInstance();
         return  cd.get(Calendar.HOUR);
     }
-
 }

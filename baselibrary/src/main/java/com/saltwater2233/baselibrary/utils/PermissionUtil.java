@@ -94,6 +94,4 @@ public class PermissionUtil {
         });
         builder.create().show();
     }
-
-
 }

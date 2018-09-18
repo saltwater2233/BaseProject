@@ -14,7 +14,8 @@ import android.view.MotionEvent;
  *     version: 1.0
  * </pre>
  */
-public class NoSlidingViewPager  extends ViewPager {
+
+public class NoSlidingViewPager extends ViewPager {
 
     public NoSlidingViewPager(Context context) {
         super(context);

@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.saltwater2233.baselibrary.utils.DialogUtil;
 import com.saltwater2233.baselibrary.widget.LoadingDialog;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
@@ -42,7 +41,6 @@ public abstract class BaseLazyFragment<V, T extends BasePresenter<V>> extends Rx
 
         isInit = true;
         mUnbinder = ButterKnife.bind(this, mView);
-        mContext = getContext();
 
         //判断是否使用MVP模式
         mPresenter = createPresenter();
@@ -109,14 +107,14 @@ public abstract class BaseLazyFragment<V, T extends BasePresenter<V>> extends Rx
     protected abstract T createPresenter();
 
 
-    public void hideLoading() {
+    public void hideLoadingDialog() {
         if (mLoadingDialog != null && mLoadingDialog.isShowing())
             mLoadingDialog.dismiss();
     }
 
-    public void showLoading() {
+    public void showLoadingDialog() {
         if (mLoadingDialog == null)
-            mLoadingDialog = new LoadingDialog(mContext, true);
+            mLoadingDialog = new LoadingDialog(getActivity(), true);
         if (!mLoadingDialog.isShowing())
             mLoadingDialog.show();
     }
@@ -136,6 +134,4 @@ public abstract class BaseLazyFragment<V, T extends BasePresenter<V>> extends Rx
             mPresenter.detachView();
         }
     }
-
-
 }

@@ -48,7 +48,7 @@ public class UpdateActivity extends BaseActivity<UpdateContract.View, UpdatePres
 
     @Override
     public void setUpdateInfo(String info) {
-        hideLoading();
+        hideLoadingDialog();
         mTvLocation.setText(info);
     }
 
@@ -56,7 +56,7 @@ public class UpdateActivity extends BaseActivity<UpdateContract.View, UpdatePres
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_location:
-                showLoading();
+                showLoadingDialog();
                 mPresenter.loadUpdate();
                 break;
             case R.id.tv_location:

@@ -19,6 +19,7 @@ import butterknife.Unbinder;
  * <pre>
  *     author : wenxin
  *     e-mail : wenxin2233@outlook.com
+ * <<<<<<< HEAD
  *     time   : 2018/09/18
  *     desc   : Activity基类
  *     version: 2.0
@@ -56,14 +57,14 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends RxAppC
         StatusBarUtil.StatusBarLightMode(this);
     }
 
-    public void showLoading() {
+    public void showLoadingDialog() {
         if (mLoadingDialog == null)
-            mLoadingDialog = new LoadingDialog(mContext, true);
+            mLoadingDialog = new LoadingDialog(this, true);
         if (!mLoadingDialog.isShowing())
             mLoadingDialog.show();
     }
 
-    public void hideLoading() {
+    public void hideLoadingDialog() {
         if (mLoadingDialog != null && mLoadingDialog.isShowing())
             mLoadingDialog.dismiss();
     }
@@ -104,5 +105,4 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends RxAppC
         }
         ActivityStackManager.getInstance().remove(this);
     }
-
 }

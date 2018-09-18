@@ -10,7 +10,6 @@ import android.support.annotation.IntDef;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.view.Gravity;
-
 import com.saltwater2233.baselibrary.R;
 
 import java.lang.annotation.Retention;
@@ -23,6 +22,7 @@ import java.lang.annotation.RetentionPolicy;
  */
 
 public class DrawableTextView extends AppCompatTextView {
+
 
     private Drawable[] drawables;
     private int[] widths;
@@ -185,6 +185,7 @@ public class DrawableTextView extends AppCompatTextView {
 
         canvas.translate(translateWidth, translateHeight);
     }
+
 
 }
 

@@ -194,6 +194,4 @@ public class StringUtil {
         }
         return new String(chars);
     }
-
-
 }

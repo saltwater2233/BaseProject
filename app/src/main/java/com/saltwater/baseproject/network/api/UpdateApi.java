@@ -1,9 +1,9 @@
 package com.saltwater.baseproject.network.api;
 
 
-
 import com.saltwater.baseproject.network.entity.ResponseEntity;
 import com.saltwater.baseproject.module.update.entity.UpdateBean;
+import com.saltwater.baseproject.network.entity.UpdateEntity;
 
 import java.util.Map;
 
@@ -35,10 +35,6 @@ public interface UpdateApi {
 
     @GET("api/4/version/android/2.3.0")
     Observable<UpdateBean> getUpdate();
-
-
-    @GET("api/4/version/android/2.3.0")
-    Observable<ResponseEntity<UpdateBean>> getUpdate2();
 
     /*上传文件*/
     @Multipart

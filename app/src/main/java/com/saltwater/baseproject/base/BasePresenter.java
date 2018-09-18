@@ -1,12 +1,9 @@
 package com.saltwater.baseproject.base;
 
 import android.content.Context;
-
-import com.saltwater.baseproject.R;
 import com.saltwater2233.baselibrary.utils.LogUtil;
 import com.saltwater2233.baselibrary.utils.ToastUtil;
 import com.trello.rxlifecycle2.LifecycleProvider;
-
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 

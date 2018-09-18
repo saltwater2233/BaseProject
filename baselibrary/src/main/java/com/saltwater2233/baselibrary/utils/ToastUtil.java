@@ -19,6 +19,7 @@ public class ToastUtil {
     private static Toast toast;
     private static Snackbar snackbar;
 
+
     /**
      * 短时间显示Toast
      *

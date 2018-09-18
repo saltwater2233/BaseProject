@@ -18,7 +18,6 @@ import android.util.Log;
  * </pre>
  */
 public class CheckInfoUtil {
-
     /**启动隐式Activity,会先判断是否存在响应目标的Activity
      * @return
      */

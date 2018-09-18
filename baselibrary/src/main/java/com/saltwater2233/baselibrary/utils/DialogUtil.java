@@ -7,7 +7,6 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.WindowManager;
 
-import com.saltwater2233.baselibrary.R;
 
 
 /**
@@ -20,8 +19,6 @@ import com.saltwater2233.baselibrary.R;
  * </pre>
  */
 public class DialogUtil extends DialogFragment {
-
-
     private static int mWidth = 160;
     private static int mHeight = 150;
 
@@ -55,6 +52,8 @@ public class DialogUtil extends DialogFragment {
         alertDialog.show();
         return alertDialog;
     }
+
+
 
     /**
      * 设置对话框大小,直接用dp
