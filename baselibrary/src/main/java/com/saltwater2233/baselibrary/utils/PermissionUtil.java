@@ -23,6 +23,8 @@ import io.reactivex.functions.Consumer;
  */
 
 public class PermissionUtil {
+
+
     public interface PermissionsResultListener {
         //成功
         void onSuccessful();

@@ -11,17 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- 知乎照片选择框架，拍照功能的FileProvider-->
-        <!--android:authorities 注意改成包名-->
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.saltwater.baseproject"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/filepaths" />
-        </provider>
+
 
         <activity android:name=".module.update.activity.UpdateActivity">
             <intent-filter>

@@ -1,15 +1,13 @@
 package com.saltwater.baseproject.base;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.saltwater2233.baselibrary.widget.LoadingDialog;
-import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -23,13 +21,13 @@ import butterknife.Unbinder;
  *     version: 1.0
  * </pre>
  */
-public abstract class BaseLazyFragment<V, T extends BasePresenter<V>> extends RxFragment {
+public abstract class BaseLazyFragment<V, T extends BasePresenter<V, M>> extends Fragment {
     protected View mView;
     protected Unbinder mUnbinder;
     protected Context mContext;
-
-    private LoadingDialog mLoadingDialog;
     protected T mPresenter;
+    private ProgressDialog mProgressDialog;
+
 
     protected boolean isInit = false;//视图是否已经初初始化
     protected boolean isLoad = false;
@@ -38,7 +36,7 @@ public abstract class BaseLazyFragment<V, T extends BasePresenter<V>> extends Rx
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(setLayout(), container, false);
-
+        mContext = getContext();
         isInit = true;
         mUnbinder = ButterKnife.bind(this, mView);
 
@@ -91,6 +89,9 @@ public abstract class BaseLazyFragment<V, T extends BasePresenter<V>> extends Rx
      */
     protected abstract int setLayout();
 
+    //用于创建Presenter和判断是否使用MVP模式(由子类实现)
+    protected abstract T createPresenter();
+
 
     /**
      * 当视图初始化并且对用户可见的时候去真正的加载数据
@@ -103,21 +104,6 @@ public abstract class BaseLazyFragment<V, T extends BasePresenter<V>> extends Rx
     protected void stopLoad() {
     }
 
-    //用于创建Presenter和判断是否使用MVP模式(由子类实现)
-    protected abstract T createPresenter();
-
-
-    public void hideLoadingDialog() {
-        if (mLoadingDialog != null && mLoadingDialog.isShowing())
-            mLoadingDialog.dismiss();
-    }
-
-    public void showLoadingDialog() {
-        if (mLoadingDialog == null)
-            mLoadingDialog = new LoadingDialog(getActivity(), true);
-        if (!mLoadingDialog.isShowing())
-            mLoadingDialog.show();
-    }
 
     /**
      * 视图销毁的时候讲Fragment是否初始化的状态变为false
@@ -132,6 +118,24 @@ public abstract class BaseLazyFragment<V, T extends BasePresenter<V>> extends Rx
         }
         if (mPresenter != null) {
             mPresenter.detachView();
+        }
+    }
+
+
+    protected void showLoadingDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(mContext, android.R.style.Theme_Material_Light_Dialog);
+            //mProgressDialog.setTitle();
+            mProgressDialog.setCancelable(false); // disable dismiss by tapping outside of the dialog
+        }
+        if (!mProgressDialog.isShowing()) {
+            mProgressDialog.show();
+        }
+    }
+
+    protected void hideLoadingDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
         }
     }
 }

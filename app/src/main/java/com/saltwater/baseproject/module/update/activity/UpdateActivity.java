@@ -1,18 +1,15 @@
 package com.saltwater.baseproject.module.update.activity;
 
-import android.Manifest;
-import android.os.Bundle;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.saltwater.baseproject.R;
 import com.saltwater.baseproject.base.BaseActivity;
-import com.saltwater.baseproject.base.BasePresenter;
 import com.saltwater.baseproject.module.update.contract.UpdateContract;
 import com.saltwater.baseproject.module.update.presenter.UpdatePresenter;
-import com.saltwater2233.baselibrary.utils.ImageTakeUtil;
-import com.saltwater2233.baselibrary.utils.PermissionUtil;
+import com.saltwater2233.baselibrary.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -31,7 +28,7 @@ public class UpdateActivity extends BaseActivity<UpdateContract.View, UpdatePres
 
     @Override
     protected UpdatePresenter createPresenter() {
-        return new UpdatePresenter(this, this);
+        return new UpdatePresenter(this);
     }
 
 
@@ -49,7 +46,14 @@ public class UpdateActivity extends BaseActivity<UpdateContract.View, UpdatePres
     @Override
     public void setUpdateInfo(String info) {
         hideLoadingDialog();
+        ToastUtil.showShort(mContext, info);
         mTvLocation.setText(info);
+
+    }
+
+    @Override
+    public void showToast(String msg) {
+        ToastUtil.showShort(mContext, msg);
     }
 
     @OnClick({R.id.btn_location, R.id.tv_location})
@@ -60,20 +64,11 @@ public class UpdateActivity extends BaseActivity<UpdateContract.View, UpdatePres
                 mPresenter.loadUpdate();
                 break;
             case R.id.tv_location:
-                PermissionUtil.getPermissionAll(this, new PermissionUtil.PermissionsResultListener() {
-                    @Override
-                    public void onSuccessful() {
-                        ImageTakeUtil.selectImage(UpdateActivity.this, 0);
-                    }
-
-                    @Override
-                    public void onFailure() {
-
-                    }
-                }, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA);
-
+                finish();
+                startActivity(new Intent(this, UpdateActivity.class));
                 break;
         }
     }
+
 
 }

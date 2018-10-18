@@ -1,11 +1,11 @@
 package com.saltwater.baseproject.base;
 
 import android.content.Context;
-import com.saltwater2233.baselibrary.utils.LogUtil;
-import com.saltwater2233.baselibrary.utils.ToastUtil;
-import com.trello.rxlifecycle2.LifecycleProvider;
+
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
+
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * <pre>
@@ -16,18 +16,18 @@ import java.lang.ref.WeakReference;
  *     version: 1.0
  * </pre>
  */
-public class BasePresenter<V> {
-    protected Reference<V> mViewRef;
-    protected Reference<LifecycleProvider> mProviderRef;
-    private Context mContext;
+public class BasePresenter<V, M> {
+    private Reference<V> mViewRef;
+    protected CompositeDisposable mCompositeDisposable;
+    protected Context mContext;
 
-    public BasePresenter(Context context, LifecycleProvider provider) {
+    public BasePresenter(Context context) {
         mContext = context;
-        mProviderRef = new WeakReference<>(provider);
     }
 
     public void attachView(V view) {
         mViewRef = new WeakReference<>(view);
+        mCompositeDisposable = new CompositeDisposable();
     }
 
     public void detachView() {
@@ -35,30 +35,15 @@ public class BasePresenter<V> {
             mViewRef.clear();
             mViewRef = null;
         }
-        if (mProviderRef != null) {
-            mProviderRef.clear();
-            mProviderRef = null;
-        }
+
         mContext = null;
+        mCompositeDisposable.dispose();
     }
 
     public V getView() {
         return mViewRef != null ? mViewRef.get() : null;
     }
 
-    public LifecycleProvider getProvider() {
-        return mProviderRef != null ? mProviderRef.get() : null;
-    }
-
-    public Context getContext() {
-        return mContext;
-    }
-
-    //请求失败
-    public void requestFail(Throwable throwable) {
-        LogUtil.d(throwable.getMessage());
-        ToastUtil.showShort(mContext, "请求失败 " + throwable.getMessage());
-    }
 
 
 }

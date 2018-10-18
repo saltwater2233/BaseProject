@@ -11,9 +11,10 @@ import com.google.gson.annotations.SerializedName;
  *     version: 1.0
  * </pre>
  */
-public class ResponseEntity<T> {
+public class BaseResponse<T> {
     private T mData;//返回数据
     private int mStatue;//返回状态
+
     @SerializedName(value = "info", alternate = {"code", "xxx", "yyy", "zzz"})
     private String mInfo;//返回信息
 

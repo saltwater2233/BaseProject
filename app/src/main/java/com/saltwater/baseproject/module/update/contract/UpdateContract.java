@@ -1,5 +1,8 @@
 package com.saltwater.baseproject.module.update.contract;
 
+import android.content.Context;
+
+import com.saltwater.baseproject.base.BasePresenter;
 import com.saltwater.baseproject.base.BaseView;
 
 /**
@@ -17,5 +20,19 @@ public interface UpdateContract {
     interface View extends BaseView {
         void setUpdateInfo(String msg);
     }
+
+
+    abstract class Presenter extends BasePresenter<View,Model> {
+        public Presenter(Context context) {
+            super(context);
+        }
+
+        public abstract void loadUpdate();
+    }
+
+    abstract class Model {
+
+    }
+
 
 }

@@ -5,8 +5,11 @@ import android.content.Context;
 import com.saltwater.baseproject.base.BasePresenter;
 import com.saltwater.baseproject.module.update.contract.UpdateContract;
 import com.saltwater.baseproject.module.update.entity.UpdateBean;
-import com.saltwater.baseproject.module.update.model.UpdateModel;
-import com.trello.rxlifecycle2.LifecycleProvider;
+import com.saltwater.baseproject.network.RetrofitHelper;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 
 /**
@@ -19,19 +22,31 @@ import com.trello.rxlifecycle2.LifecycleProvider;
  * </pre>
  */
 
-public class UpdatePresenter extends BasePresenter<UpdateContract.View> {
+public class UpdatePresenter extends UpdateContract.Presenter {
 
-    public UpdatePresenter(Context context, LifecycleProvider provider) {
-        super(context, provider);
+
+    public UpdatePresenter(Context context) {
+        super(context);
     }
 
+    @Override
     public void loadUpdate() {
-
-        UpdateModel.update(this);
+        mCompositeDisposable.add(RetrofitHelper.getUpdateApi()
+                .getUpdate()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<UpdateBean>() {
+                    @Override
+                    public void accept(UpdateBean updateBean) throws Exception {
+                        getView().setUpdateInfo(updateBean.getMsg());
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        getView().showToast(throwable.getMessage());
+                    }
+                }));
     }
 
-    public void updateSuccess(UpdateBean info) {
-        getView().setUpdateInfo(info.getMsg());
-    }
 
 }

@@ -1,9 +1,8 @@
 package com.saltwater.baseproject.network.api;
 
 
-import com.saltwater.baseproject.network.entity.ResponseEntity;
+import com.saltwater.baseproject.network.entity.BaseResponse;
 import com.saltwater.baseproject.module.update.entity.UpdateBean;
-import com.saltwater.baseproject.network.entity.UpdateEntity;
 
 import java.util.Map;
 
@@ -31,7 +30,7 @@ import retrofit2.http.Query;
 public interface UpdateApi {
 
     @GET("Login/getVerify")
-    Observable<ResponseEntity<Object>> getVerify(@Query("login_name") String phoneNumber, @Query("isFindPwd") int type);
+    Observable<BaseResponse<Object>> getVerify(@Query("login_name") String phoneNumber, @Query("isFindPwd") int type);
 
     @GET("api/4/version/android/2.3.0")
     Observable<UpdateBean> getUpdate();
