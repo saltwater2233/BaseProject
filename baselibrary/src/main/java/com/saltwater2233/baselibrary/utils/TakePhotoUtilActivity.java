@@ -1,4 +1,4 @@
-package com.saltwater2233.baselibrary.activity;
+package com.saltwater2233.baselibrary.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,18 +6,27 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.content.FileProvider;
 import android.widget.Toast;
 
-import com.jph.takephoto.app.TakePhoto;
-import com.jph.takephoto.app.TakePhotoActivity;
-import com.jph.takephoto.compress.CompressConfig;
-import com.jph.takephoto.model.CropOptions;
-import com.jph.takephoto.model.TResult;
-import com.jph.takephoto.model.TakePhotoOptions;
+import com.saltwater2233.baselibrary.BuildConfig;
 import com.saltwater2233.baselibrary.R;
+
+import org.devio.takephoto.app.TakePhoto;
+import org.devio.takephoto.app.TakePhotoActivity;
+import org.devio.takephoto.compress.CompressConfig;
+import org.devio.takephoto.model.CropOptions;
+import org.devio.takephoto.model.TResult;
+import org.devio.takephoto.model.TakePhotoOptions;
 
 import java.io.File;
 
+/**
+ * 使用方法：1.创建TakePhotoUtilActivity
+ * 2.再AndroidManifest中创建provider
+ * 3.再res的xml里创建file_paths
+ * 4.在onActivityResult里接受返回的path = data.getStringExtra(TakePhotoUtilActivity.sRESULT);
+ */
 public class TakePhotoUtilActivity extends TakePhotoActivity {
     private static final String sTYPE = "type";
     public static final String sRESULT = "result";
@@ -46,11 +55,11 @@ public class TakePhotoUtilActivity extends TakePhotoActivity {
     private int limit = 1;//从画廊里选择的照片数量
 
     private void init(TakePhoto takePhoto) {
-        File file = new File(Environment.getExternalStorageDirectory(), "/funxue/" + System.currentTimeMillis() + ".jpg");
+        File file = new File(Environment.getExternalStorageDirectory(), getPackageName() + System.currentTimeMillis() + ".jpg");
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
         }
-        Uri imageUri = Uri.fromFile(file);
+        Uri imageUri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".fileprovider", file);
         configCompress(takePhoto);
         configTakePhotoOption(takePhoto);
 
@@ -74,25 +83,6 @@ public class TakePhotoUtilActivity extends TakePhotoActivity {
         }
 
     }
-
-
-   /* 获取返回的数据复制下面的代码就ojbk了
-
-   @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_OK) {
-            return;
-        }
-
-        switch (requestCode) {
-            case 0:
-                String path = data.getStringExtra(TakePhotoUtilActivity.sRESULT);
-                Glide.with(this).load(new File(path)).into(img);
-                break;
-        }
-    }*/
-
 
     /**
      * 配置图片选择的方式

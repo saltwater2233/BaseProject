@@ -6,9 +6,12 @@ import android.net.Uri;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 /**
  * <pre>
@@ -21,8 +24,6 @@ import java.io.File;
  */
 
 public class ImageLoadUtil {
-
-
 
     private ImageLoadUtil() {
         /* cannot be instantiated */
@@ -55,30 +56,41 @@ public class ImageLoadUtil {
     }
 
     public static void loadFilePath(Context mContext, String filePath, ImageView imageView) {
-        Glide.with(mContext).load(Uri.fromFile(new File(filePath))).into(imageView);
+        Glide.with(mContext).load(new File(filePath)).into(imageView);
     }
 
 
     //加载图片url地址，带加载中图片和加载失败图片
     public static void loadImageWithLoading(Context mContext, String url, ImageView imageView, int loadingImage, int errorImage) {
-        Glide.with(mContext).load(url).placeholder(loadingImage).error(errorImage).into(imageView);
+        Glide.with(mContext)
+                .load(url)
+                .apply(new RequestOptions().placeholder(loadingImage).error(errorImage))
+                .into(imageView);
     }
 
     //加载res资源，带加载中图片和加载失败图片
-    public static void loadImageWithLoading(Context mContext, int res, ImageView mImageView, int loadingImage, int errorImage) {
-        Glide.with(mContext).load(res).placeholder(loadingImage).error(errorImage).into(mImageView);
+    public static void loadImageWithLoading(Context mContext, int res, ImageView imageView, int loadingImage, int errorImage) {
+        Glide.with(mContext)
+                .load(res)
+                .apply(new RequestOptions().placeholder(loadingImage).error(errorImage))
+                .into(imageView);
     }
 
     /**
      *
      */
-    public static void loadImageWithLoading(Context mContext, Uri uri, ImageView mImageView, int loadingImage, int errorImage) {
-        Glide.with(mContext).load(uri).placeholder(loadingImage).error(errorImage).into(mImageView);
+    public static void loadImageWithLoading(Context mContext, Uri uri, ImageView imageView, int loadingImage, int errorImage) {
+        Glide.with(mContext)
+                .load(uri)
+                .apply(new RequestOptions().placeholder(loadingImage).error(errorImage))
+                .into(imageView);
     }
 
     //设置加载动画
-    public static void loadImageViewWithAnim(Context mContext, String url, int anim, ImageView mImageView) {
-        Glide.with(mContext).load(url).animate(anim).into(mImageView);
+    public static void loadImageViewWithAnim(Context mContext, String url, int anim, ImageView imageView) {
+        Glide.with(mContext)
+                .load(url)
+                .transition(withCrossFade(anim))
+                .into(imageView);
     }
-
 }
