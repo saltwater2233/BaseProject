@@ -2,12 +2,15 @@ package com.saltwater.baseproject.base;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.saltwater.baseproject.MyApp;
 import com.saltwater2233.baselibrary.utils.ActivityStackManager;
+import com.saltwater2233.baselibrary.utils.LeakFixUtil;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -68,6 +71,9 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
             mPresenter.detachView();
         }
         ActivityStackManager.getInstance().remove(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            LeakFixUtil.fixFocusedViewLeak(MyApp.getInstance());
+        }
     }
 
 

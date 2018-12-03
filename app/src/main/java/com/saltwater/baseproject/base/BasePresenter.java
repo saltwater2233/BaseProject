@@ -16,7 +16,7 @@ import io.reactivex.disposables.CompositeDisposable;
  *     version: 1.0
  * </pre>
  */
-public class BasePresenter<V, M> {
+public class BasePresenter<V> {
     private Reference<V> mViewRef;
     protected CompositeDisposable mCompositeDisposable;
     protected Context mContext;
