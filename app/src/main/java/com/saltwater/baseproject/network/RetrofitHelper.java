@@ -3,6 +3,7 @@ package com.saltwater.baseproject.network;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.orhanobut.logger.Logger;
 import com.saltwater.baseproject.MyApp;
 import com.saltwater.baseproject.network.api.UpdateApi;
 
@@ -39,7 +40,7 @@ public class RetrofitHelper {
      * 初始化OKHttpClient,设置缓存,设置超时时间,构造头部
      */
     private static OkHttpClient getOkHttpClient() {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLogger());
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 //.addNetworkInterceptor(new StethoInterceptor())
@@ -51,6 +52,14 @@ public class RetrofitHelper {
                 .readTimeout(20, TimeUnit.SECONDS)
                 .build();
         return httpClient;
+    }
+
+
+    public static class HttpLogger implements HttpLoggingInterceptor.Logger {
+        @Override
+        public void log(String message) {
+            Logger.d("HttpLogInfo", message);
+        }
     }
 
     /**

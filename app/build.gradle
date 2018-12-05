@@ -39,6 +39,14 @@ dependencies {
     //json处理
     implementation 'com.google.code.gson:gson:2.8.2'
 
+    //图片加载
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+
+    //图片选择
+    implementation 'org.devio.takephoto:takephoto_library:4.1.0'
+
+    //图片查看,https://github.com/chrisbanes/PhotoView
+    implementation 'com.github.chrisbanes:PhotoView:2.1.4'
 
     //butterKnife
     implementation 'com.jakewharton:butterknife:8.4.0'
@@ -48,32 +56,42 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
 
+    //事件总线
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+    //日志打印
+    implementation 'com.orhanobut:logger:2.2.0'
+
     // ------------- RxJava相关 -------------
 
     //rxJava2
     implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
 
+    //权限请求
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
 
     // ------------- 网络相关 -------------
+
     //底层okHttp
     implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+
     //打印请求日志，logtcat关键字：okhttp
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+
     //retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+
     //retrofit2转gson辅助
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+
     //retrofit2转RxJava辅助
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+
     //Cookie保持
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 
-
     //RecyclerView辅助工具，https://github.com/CymChad/BaseRecyclerViewAdapterHelper
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
-
-
-    implementation project(':baselibrary')
 
 }

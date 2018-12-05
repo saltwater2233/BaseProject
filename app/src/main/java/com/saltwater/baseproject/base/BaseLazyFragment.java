@@ -21,12 +21,13 @@ import butterknife.Unbinder;
  *     version: 1.0
  * </pre>
  */
-public abstract class BaseLazyFragment<V, T extends BasePresenter<V, M>> extends Fragment {
+public abstract class BaseLazyFragment<V, T extends BasePresenter<V>> extends Fragment {
     protected View mView;
     protected Unbinder mUnbinder;
     protected Context mContext;
     protected T mPresenter;
     private ProgressDialog mProgressDialog;
+    protected final String TAG = this.getClass().getSimpleName();
 
 
     protected boolean isInit = false;//视图是否已经初初始化

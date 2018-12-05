@@ -2,15 +2,18 @@ package com.saltwater.baseproject.base;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 
 import com.saltwater.baseproject.MyApp;
-import com.saltwater2233.baselibrary.utils.ActivityStackManager;
-import com.saltwater2233.baselibrary.utils.LeakFixUtil;
+import com.saltwater.baseproject.utils.ActivityStackManager;
+import com.saltwater.baseproject.utils.LeakFixUtil;
+import com.saltwater.baseproject.utils.ScreenAdaptationUtil;
+
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -25,6 +28,9 @@ import butterknife.Unbinder;
  * </pre>
  */
 public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
+    private boolean isAllowScreenRotate = false;//是否禁止旋转屏幕
+    protected final String TAG = this.getClass().getSimpleName();
+
     protected Context mContext;
     protected Unbinder mUnbinder;
     protected T mPresenter;
@@ -33,16 +39,25 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mPresenter = createPresenter();
         if (mPresenter != null) {
             mPresenter.attachView((V) this);//因为之后所有的子类都要实现对应的View接口
         }
 
         ActivityStackManager.getInstance().push(this);
-        setContentView(getContentViewId());
+
+        setContentView(bindLayout());
+
+        if (!isAllowScreenRotate) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
         mContext = this;
         mUnbinder = ButterKnife.bind(this);
+
+        ScreenAdaptationUtil.setCustomDesity(this, getApplication(), false);
 
         initView();
         initData();
@@ -53,7 +68,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     protected abstract T createPresenter();
 
     //获取显示view的xml文件ID
-    protected abstract int getContentViewId();
+    protected abstract int bindLayout();
 
     //初始化view
     protected abstract void initView();
@@ -71,22 +86,16 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
             mPresenter.detachView();
         }
         ActivityStackManager.getInstance().remove(this);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             LeakFixUtil.fixFocusedViewLeak(MyApp.getInstance());
         }
     }
 
 
-    //toolbar的返回键事件
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+    //设置是否可旋转
+    public void setScreenRotate(boolean isAllowScreenRotate) {
+        this.isAllowScreenRotate = isAllowScreenRotate;
     }
 
 

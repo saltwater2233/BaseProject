@@ -18,5 +18,5 @@ package com.saltwater.baseproject.base;
 
 
 public interface BaseView {
-    void showToast(String msg);
+
 }

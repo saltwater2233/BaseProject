@@ -22,7 +22,7 @@ public class UpdateActivity extends BaseActivity<UpdateContract.View, UpdatePres
     TextView mTvLocation;
 
     @Override
-    protected int getContentViewId() {
+    protected int bindLayout() {
         return R.layout.activity_main;
     }
 
