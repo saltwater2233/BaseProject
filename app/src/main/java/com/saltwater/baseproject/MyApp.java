@@ -18,12 +18,16 @@ public class MyApp extends Application {
     }
 
     private void init() {
-        LeakCanary.install(this);//初始化Leak内存泄露检测工具
+        //初始化Leak内存泄露检测工具
+        if (sIsDebug) {
+            LeakCanary.install(this);
+        }
+
         //初始化日志打印工具
         Logger.addLogAdapter(new AndroidLogAdapter() {
             @Override
             public boolean isLoggable(int priority, String tag) {
-                return MyApp.sIsDebug;
+                return sIsDebug;
             }
         });
     }

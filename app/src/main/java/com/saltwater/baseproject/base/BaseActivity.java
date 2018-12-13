@@ -13,8 +13,6 @@ import com.saltwater.baseproject.utils.ActivityStackManager;
 import com.saltwater.baseproject.utils.LeakFixUtil;
 import com.saltwater.baseproject.utils.ScreenAdaptationUtil;
 
-import org.greenrobot.eventbus.ThreadMode;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -28,7 +26,7 @@ import butterknife.Unbinder;
  * </pre>
  */
 public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
-    private boolean isAllowScreenRotate = false;//是否禁止旋转屏幕
+    private boolean isAllowScreenRotate = true;//是否禁止旋转屏幕
     protected final String TAG = this.getClass().getSimpleName();
 
     protected Context mContext;
