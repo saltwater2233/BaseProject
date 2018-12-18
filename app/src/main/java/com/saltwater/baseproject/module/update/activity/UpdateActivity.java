@@ -9,7 +9,8 @@ import com.saltwater.baseproject.R;
 import com.saltwater.baseproject.base.BaseActivity;
 import com.saltwater.baseproject.module.update.contract.UpdateContract;
 import com.saltwater.baseproject.module.update.presenter.UpdatePresenter;
-import com.saltwater2233.baselibrary.utils.ToastUtil;
+import com.saltwater.baseproject.utils.ToastUtil;
+
 
 import butterknife.BindView;
 import butterknife.OnClick;

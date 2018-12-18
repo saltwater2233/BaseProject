@@ -19,10 +19,12 @@ public interface UpdateContract {
 
     interface View extends BaseView {
         void setUpdateInfo(String msg);
+
+        void showToast(String msg);
     }
 
 
-    abstract class Presenter extends BasePresenter<View,Model> {
+    abstract class Presenter extends BasePresenter<View> {
         public Presenter(Context context) {
             super(context);
         }

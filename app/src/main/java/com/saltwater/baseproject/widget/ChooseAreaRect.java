@@ -13,7 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.saltwater2233.baselibrary.utils.ScreenInfoUtil;
+import com.saltwater.baseproject.utils.ScreenInfoUtil;
 
 
 /**

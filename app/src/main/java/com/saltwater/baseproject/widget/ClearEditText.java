@@ -18,7 +18,8 @@ import android.view.animation.Animation;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
 
-import com.saltwater2233.baselibrary.R;
+import com.saltwater.baseproject.R;
+
 
 /**
  * <pre>

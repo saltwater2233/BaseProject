@@ -11,7 +11,8 @@ import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.view.Gravity;
 
-import com.saltwater2233.baselibrary.R;
+
+import com.saltwater.baseproject.R;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

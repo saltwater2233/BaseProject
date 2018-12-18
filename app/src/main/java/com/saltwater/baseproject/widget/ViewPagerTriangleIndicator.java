@@ -16,7 +16,8 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.saltwater2233.baselibrary.R;
+
+import com.saltwater.baseproject.R;
 
 import java.util.List;
 
