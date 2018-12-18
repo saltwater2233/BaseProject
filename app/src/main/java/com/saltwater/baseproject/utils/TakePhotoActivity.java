@@ -1,6 +1,7 @@
 package com.saltwater.baseproject.utils;
 
 import android.Manifest;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -63,6 +64,7 @@ public class TakePhotoActivity extends BaseActivity {
     @Override
     protected void initView() {
         StatusBarUtil.hideStatusBar(this);
+        ScreenAdaptationUtil.resetDensity(this, getApplication());//重设DisplayMetrics
     }
 
     @Override

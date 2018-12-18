@@ -55,7 +55,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         mContext = this;
         mUnbinder = ButterKnife.bind(this);
 
-        ScreenAdaptationUtil.setCustomDesity(this, getApplication(), false);
+        ScreenAdaptationUtil.setCustomDensity(this, getApplication(), false);
 
         initView();
         initData();
