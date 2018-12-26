@@ -1,7 +1,7 @@
 package com.saltwater.baseproject.module.update;
 
 import com.TrampolineSchedulerRule;
-import com.saltwater.baseproject.module.update.contract.UpdateContract;
+import com.saltwater.baseproject.module.update.view.UpdateView;
 import com.saltwater.baseproject.module.update.presenter.UpdatePresenter;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
@@ -30,7 +30,7 @@ public class UpdatePresenterTest {
 
     private UpdatePresenter updatePresenter;
     @Mock
-    private UpdateContract.View view;
+    private UpdateView.View view;
 
     @Mock
     private LifecycleProvider<ActivityEvent> provider;

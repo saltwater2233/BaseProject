@@ -1,8 +1,8 @@
 package com.saltwater.baseproject.network;
 
-import com.franmontiel.persistentcookiejar.PersistentCookieJar;
-import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.orhanobut.logger.Logger;
 import com.saltwater.baseproject.MyApp;
 import com.saltwater.baseproject.network.api.UpdateApi;
@@ -10,6 +10,8 @@ import com.saltwater.baseproject.network.api.UpdateApi;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -30,10 +32,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class RetrofitHelper {
+    private final static String FILE_NAME = "userinfo";
+    private final static String COOKIE = "cookie";
 
     public static UpdateApi getUpdateApi() {
-        return createApi(UpdateApi.class, ApiConstants.BASE_URL);
+        return createApi(UpdateApi.class, ApiConstants.INSTANCE.getBASE_URL());
     }
+
 
     /**
      * 由于retrofit底层的实现是通过okhttp实现的，所以可以通过okHttp来设置一些连接参数
@@ -43,9 +48,9 @@ public class RetrofitHelper {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLogger());
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient httpClient = new OkHttpClient.Builder()
-                //.addNetworkInterceptor(new StethoInterceptor())
                 //.addInterceptor(new HeaderInterceptor())
-                .cookieJar(new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(MyApp.getInstance())))
+                .addInterceptor(new ReceivedCookiesInterceptor())
+                .addInterceptor(new AddCookiesInterceptor())
                 .addInterceptor(interceptor)
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(20, TimeUnit.SECONDS)
@@ -77,6 +82,56 @@ public class RetrofitHelper {
             return chain.proceed(request);
         }
     }
+
+    //保存获取到的cookie
+    private static class ReceivedCookiesInterceptor implements Interceptor {
+
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+
+            Response originalResponse = chain.proceed(chain.request());
+            //这里获取请求返回的cookie
+            if (!originalResponse.headers("Set-Cookie").isEmpty()) {
+                final StringBuffer cookieBuffer = new StringBuffer();
+                Observable.fromArray(originalResponse.headers("Set-Cookie")
+                        .toArray(new String[originalResponse.headers("Set-Cookie").size()]))
+                        .subscribe(new Consumer<String>() {
+                            @Override
+                            public void accept(String cookie) throws Exception {
+                                cookieBuffer.append(cookie).append(";");
+                            }
+                        });
+
+                SharedPreferences sp = MyApp.getInstance().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString(COOKIE, cookieBuffer.toString());
+                editor.commit();//提交修改
+            }
+            return originalResponse;
+        }
+    }
+
+    //给请求加上cookie
+    private static class AddCookiesInterceptor implements Interceptor {
+
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+
+            final Request.Builder builder = chain.request().newBuilder();
+            SharedPreferences sp = MyApp.getInstance().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+            String cookie = sp.getString(COOKIE, "");
+            Observable.just(cookie)
+                    .subscribe(new Consumer<String>() {
+                        @Override
+                        public void accept(String cookie) throws Exception {
+                            //添加cookie
+                            builder.addHeader("Cookie", cookie);
+                        }
+                    });
+            return chain.proceed(builder.build());
+        }
+    }
+
 
     /**
      * 根据传入的baseUrl，和api创建retrofit
