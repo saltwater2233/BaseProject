@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CommonLibrary</string>
+    <string name="toast_Permission_failure">获取权限失败</string>
+</resources>

@@ -1,100 +1,57 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     defaultConfig {
-        applicationId "com.saltwater.baseprojectmvp"
-        minSdkVersion 16
-        targetSdkVersion 28
+        applicationId "com.saltwater.baseproject"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
-    }
+
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
-    // ------------- Android -------------
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    /******************* ARouter路由 *******************/
+    implementation "com.alibaba:arouter-api:$rootProject.arouter_api"
+    kapt "com.alibaba:arouter-compiler:$rootProject.arouter_compiler"
 
-    // ------------- 系统控件 -------------
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'com.android.support:cardview-v7:28.0.0'
-    implementation 'com.android.support:recyclerview-v7:28.0.0'
-    implementation 'com.android.support:design:28.0.0'
-
-    // ------------- 常用库 -------------
-
-    //json处理
-    implementation 'com.google.code.gson:gson:2.8.2'
-
-    //图片加载
-    implementation 'com.github.bumptech.glide:glide:4.6.1'
-
-    //图片查看,https://github.com/chrisbanes/PhotoView
-    implementation 'com.github.chrisbanes:PhotoView:2.1.4'
-
-    //butterKnife
-    implementation 'com.jakewharton:butterknife:8.4.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
-
-    //内存泄漏检测
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.1'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
-
-    //事件总线
-    implementation 'org.greenrobot:eventbus:3.1.1'
-
-    //日志打印
-    implementation 'com.orhanobut:logger:2.2.0'
-
-    // ------------- RxJava相关 -------------
-
-    //rxJava2
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-
-    //权限请求
-    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
-
-    // ------------- 网络相关 -------------
-
-    //底层okHttp
-    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
-
-    //打印请求日志，logtcat关键字：okhttp
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
-
-    //retrofit2
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-
-    //retrofit2转gson辅助
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-
-    //retrofit2转RxJava辅助
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
-
-    //Cookie保持
-    implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
-
-    //RecyclerView辅助工具，https://github.com/CymChad/BaseRecyclerViewAdapterHelper
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    compile project(path: ':baselibrary')
-
-}
-repositories {
-    mavenCentral()
+    implementation project(path: ':ModuleCommon')
+    if (!isModuleRun.toBoolean()) {
+        implementation project(path: ':ModuleA')
+        implementation project(path: ':ModuleB')
+    }
 }

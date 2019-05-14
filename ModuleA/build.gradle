@@ -1,0 +1,77 @@
+//单独工程和lib的声明不同
+if (isModuleRun.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            // 单独调试与集成调试时使用不同的 AndroidManifest.xml 文件
+            if (isModuleRun.toBoolean()) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+                //多增加一个资源调试路径 src/main/debug/res
+                res.srcDirs = ['src/main/res', 'src/main/debug/res']
+
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                java {
+                    //module 模式下要 排除src/test/文件夹下的所有文件
+                    exclude 'src/debug/'
+                }
+            }
+
+        }
+    }
+
+    resourcePrefix "${project.name}_" //给 Module 内的资源名增加前缀, 避免资源名冲突
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+
+    implementation project(path: ':ModuleCommon')
+    /******************* ARouter路由 *******************/
+    implementation "com.alibaba:arouter-api:$rootProject.arouter_api"
+    kapt "com.alibaba:arouter-compiler:$rootProject.arouter_compiler"
+
+}
