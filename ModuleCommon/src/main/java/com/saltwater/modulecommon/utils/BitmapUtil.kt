@@ -58,7 +58,8 @@ object BitmapUtil {
         onlyBoundsOptions.inDither = true//optional
         onlyBoundsOptions.inPreferredConfig = Bitmap.Config.ARGB_8888//optional
         BitmapFactory.decodeStream(input, null, onlyBoundsOptions)
-        input.close()
+        input?.close()
+
 
         if (onlyBoundsOptions.outWidth == -1 || onlyBoundsOptions.outHeight == -1) {
             return null
@@ -78,7 +79,7 @@ object BitmapUtil {
         bitmapOptions.inPreferredConfig = Bitmap.Config.ARGB_8888//
         input = context.contentResolver.openInputStream(uri)
         val bitmap = BitmapFactory.decodeStream(input, null, bitmapOptions)
-        input.close()
+        input?.close()
         return bitmap
     }
 
@@ -148,15 +149,17 @@ object BitmapUtil {
 
 
     //把图片保存成文件
-    fun getFile(context: Context, bitmap: Bitmap, fileName: String) {
+    fun getFile(context: Context, bitmap: Bitmap, fileName: String): File? {
         val file = File(context.cacheDir, fileName)//将要保存图片的路径
         try {
             val outputStream = BufferedOutputStream(FileOutputStream(file))
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
             outputStream.flush()
             outputStream.close()
+            return file
         } catch (e: IOException) {
             e.printStackTrace()
+            return null
         }
     }
 
