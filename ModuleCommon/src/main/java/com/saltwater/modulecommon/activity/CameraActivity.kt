@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.saltwater.modulecommon.R
-import com.saltwater.modulecommon.camera.CameraUtil
 import com.saltwater.modulecommon.utils.BitmapUtil
 import com.saltwater.modulecommon.utils.PermissionUtil
 import com.saltwater.modulecommon.utils.StatusBarUtil
@@ -92,7 +91,7 @@ class CameraActivity : AppCompatActivity() {
     private fun getPhoto() {
         camera_surfaceView.isEnabled = false
         camera_surfaceView.onStop()
-        CameraUtil.getCamera().setOneShotPreviewCallback { bytes, camera ->
+        camera_surfaceView.camera.setOneShotPreviewCallback { bytes, camera ->
             val size = camera.parameters.previewSize //获取预览大小
             camera.stopPreview()
             Thread {

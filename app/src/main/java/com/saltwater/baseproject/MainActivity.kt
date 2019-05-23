@@ -17,7 +17,7 @@ class MainActivity : BaseActivity<Nothing, Nothing>() {
 
     override fun initView() {
 
-        val intent = Intent(this, ListActivity::class.java)
+         val intent = Intent(this, ListActivity::class.java)
         startActivity(intent)
 
     }
