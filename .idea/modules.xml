@@ -3,10 +3,16 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BaseProject.iml" filepath="$PROJECT_DIR$/BaseProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BaseProject-master.iml" filepath="$PROJECT_DIR$/.idea/modules/BaseProject-master.iml" group="BaseProject-master" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ModuleA/BaseProject-master-ModuleA.iml" filepath="$PROJECT_DIR$/.idea/modules/ModuleA/BaseProject-master-ModuleA.iml" group="BaseProject-master/ModuleA" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ModuleB/BaseProject-master-ModuleB.iml" filepath="$PROJECT_DIR$/.idea/modules/ModuleB/BaseProject-master-ModuleB.iml" group="BaseProject-master/ModuleB" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ModuleCommon/BaseProject-master-ModuleCommon.iml" filepath="$PROJECT_DIR$/.idea/modules/ModuleCommon/BaseProject-master-ModuleCommon.iml" group="BaseProject-master/ModuleCommon" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/BaseProject-master-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/BaseProject-master-app.iml" group="BaseProject-master/app" />
       <module fileurl="file://$PROJECT_DIR$/ModuleA/ModuleA.iml" filepath="$PROJECT_DIR$/ModuleA/ModuleA.iml" />
       <module fileurl="file://$PROJECT_DIR$/ModuleB/ModuleB.iml" filepath="$PROJECT_DIR$/ModuleB/ModuleB.iml" />
       <module fileurl="file://$PROJECT_DIR$/ModuleCommon/ModuleCommon.iml" filepath="$PROJECT_DIR$/ModuleCommon/ModuleCommon.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/common.iml" filepath="$PROJECT_DIR$/.idea/modules/common/common.iml" group="BaseProject-master/common" />
     </modules>
   </component>
 </project>

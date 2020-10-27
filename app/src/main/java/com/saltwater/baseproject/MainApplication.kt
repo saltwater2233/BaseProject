@@ -1,7 +1,7 @@
 package com.saltwater.baseproject
 
-import com.saltwater.modulecommon.BaseApplication
-import com.saltwater.modulecommon.utils.LogUtil
+import com.saltwater.common.BaseApplication
+import com.saltwater.common.utils.LogUtil
 
 /**
  * <pre>

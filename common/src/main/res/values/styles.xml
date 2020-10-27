@@ -1,0 +1,23 @@
+<resources>
+
+
+    <style name="BDAlertDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@drawable/common_bg_white_r4</item>
+        <!-- 竖屏模式下dialog的宽度 -->
+        <item name="android:windowMinWidthMinor">300dp</item>
+        <item name="windowFixedWidthMinor">300dp</item>
+    </style>
+
+    <style name="InputDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@drawable/common_bg_white_r4</item>
+        <!-- 遮罩层 -->
+        <item name="android:backgroundDimAmount">0.7</item>
+    </style>
+
+    <style name="BaseLoadingDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 遮罩层 -->
+        <item name="android:backgroundDimAmount">0.7</item>
+    </style>
+
+</resources>
